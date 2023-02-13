@@ -5,7 +5,7 @@ Site para adicionar, calcular e remover despesas.
 >Status do projeto: Em desenvolvimento
 
 >Tarefas:<br>
-[] Criar arquivos iniciais <br>
+[X] Criar arquivos iniciais <br>
 [] Criar o estilo padrão do site <br>
 [] Criar a função da lista de despesas <br>
 [] Criar a função de soma das despesas <br>
