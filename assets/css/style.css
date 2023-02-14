@@ -1,6 +1,53 @@
 :root {
     --azul-escuro: #08124b;
+    --azul-claro: #0059ff;
     --branco: #ffffff;
+    --cinza-claro: #c9c9c9;
     --preto: #000000;
     --vermelho: #ff0000;
+    --vermelho-escuro: #750000;
+
+    --fonte-principal: 'Open Sans', sans-serif;
 }
+
+body {
+    background-color: var(--azul-escuro);
+    font-family: var(--fonte-principal);
+}
+
+/* button {
+    background-color: var(--azul-claro);
+    border: none;
+    border-radius: 5px;
+    color: var(--branco);
+    font-size: 12px;
+    margin-bottom: 1px;
+    padding: 5px;
+    width: 100px;
+}
+
+button:hover {
+    width: 110px;
+} */
+
+h1 {
+    color: var(--branco);
+    text-align: center;
+    font-size: 28px;
+}
+
+h2 {
+    background-color: var(--cinza-claro);
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 12px;
+    margin: 0;
+    padding-top: 5px;
+    text-align: center;
+}
+
