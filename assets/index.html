@@ -5,10 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,600;1,700&display=swap" rel="stylesheet">
     <title>Controle de Despesas</title>
 </head>
 <body>
     <main>
+        <h1>Controle de Despesas</h1>
+        <div class="caixa">
+            <div class="display">
+                <section class="entrada">
+                    <form id="entrada">
+                        <label for="valor">Despesa:</label>
+                        <input type="text" name="despesa" id="depesa">
+                        <label for="Valor">Valor:</label>
+                        <input type="number" name="valor" id="valor">
+                        <div class="botao-adicionar">
+                            <input type="submit" value="Adicionar" id="adicionar">
+                        </div>
+                        
+                    </form>
+                </section>
+                <section class="lista">
+                    <h2>Despesas</h2>
+                    <div class="tabela">
+                       
+                    </div>
+                    <div class="total-entrada">
+                        Total:
+                    </div>
+                </section>
+            </div>
+            <section class="saida">
+                <div class="resultado">
+                    <div class="painel">
+                        <h3>Pagas</h3>
+                        <div class="amostra">
+
+                        </div>
+                        <div class="total-saida">
+                            Total:
+                        </div>
+                    </div>
+                    <div class="painel">
+                        <h3>Não pagas</h3>
+                        <div class="amostra">
+
+                        </div>
+                        <div class="total-saida">
+                            Total:
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
     </main>
     <footer>
     </footer>
