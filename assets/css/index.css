@@ -1,0 +1,110 @@
+.caixa {
+    background-color: var(--branco);
+    margin: auto;
+    width: 90%;
+    height: 500px;
+}
+
+.display {
+    display: grid;
+    grid-template-areas: "menu  lista";
+    margin: auto;
+    width: 320px;
+    height: 270px;
+}
+
+.entrada {
+    background-color: var(--branco);
+    margin: 1rem;
+    text-align: center;
+    width: 100px;
+}
+
+p {
+    font-size: 12px;
+    margin: 0;
+    width: 10px;
+}
+
+input {
+    width: 90px;
+}
+
+.botao-adicionar {
+    margin: auto;
+    padding-top: 0.7rem;
+    width: 100px;
+}
+
+input#adicionar {
+    background-color: var(--vermelho);
+    border: none;
+    border-radius: 5px;
+    color: var(--branco);
+    padding: 5px;
+    width: 90px;
+}
+
+input#adicionar:hover {
+    background-color: var(--vermelho-escuro);
+}
+
+.lista {
+    background-color: var(--branco);
+    border: 1px solid var(--preto);
+    color: var(--preto);
+    margin: 1rem 1rem 1rem 0;
+    width: 150px;
+}
+
+.tabela {
+    background-color: var(--branco);
+    margin: auto;
+    height: 190px;
+    overflow-y: scroll;
+    width: 90%;
+}
+
+.total-entrada {
+    background-color: var(--cinza-claro);
+    font-size: 12px;
+    margin: auto;
+    padding: 2px 0 2px 4px;
+}
+
+.saida {
+    background-color: var(--azul-claro);
+    border: 1px solid var(--preto);
+    border-radius: 15px;
+    margin: auto;
+    height: 200px;
+    width: 290px;
+}
+
+.resultado {
+    display: flex;
+    height: 200px;
+}
+
+.painel {
+    background-color: var(--branco);
+    border: 1px solid var(--preto);
+    border-radius: 12px;
+    margin: auto;
+    height: 185px;
+    width: 130px;
+}
+
+.amostra {
+    height: 142px;
+    overflow-y: scroll;
+}
+
+.total-saida {
+    background-color: var(--cinza-claro);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-size: 12px;
+    margin: auto;
+    padding: 2px 0 2px 4px;
+}
