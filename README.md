@@ -13,6 +13,6 @@ Site para adicionar, calcular e remover despesas.
 [] Criar a função de soma das despesas <br>
 [] Criar a função de retorno da menor despesa <br>
 [] Criar a função de retorno da maior despesa <br>
-[] Tornar o projeto responsivo <br>
+[X] Tornar o projeto responsivo <br>
 [] Revisão geral dos arquivos <br>
 [] Edição final do README <br>
