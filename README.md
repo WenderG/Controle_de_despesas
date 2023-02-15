@@ -1,7 +1,5 @@
 # Controle_de_despesas
 
-#MobileFirst
-
 Site para adicionar, calcular e remover despesas. 
 
 >Status do projeto: Em desenvolvimento
