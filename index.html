@@ -25,7 +25,7 @@
                         <div class="areas">
                             <label for="Valor">Valor (R$): </label>
                             <div>
-                                <input type="number" name="valor" id="valor" required>
+                                <input type="number" step=0.01 name="valor" id="valor" required>
                             </div>
                         </div>
                         <div class="status-pagamento">
@@ -44,10 +44,10 @@
                 </section>
                 <section class="lista">
                     <h2>Despesas</h2>
-                    <div class="tabela">
-                       
+                    <div class="tabela" id="tabela">
+                        
                     </div>
-                    <div class="total-entrada">
+                    <div class="total-entrada" id="total-entrada">
                         Total:
                     </div>
                 </section>
@@ -56,19 +56,19 @@
                 <div class="resultado">
                     <div class="painel">
                         <h3>Pagas</h3>
-                        <div class="amostra">
+                        <div class="amostra" id="pagas">
 
                         </div>
-                        <div class="total-saida">
+                        <div class="total-saida" id="total-saida-pagas">
                             Total:
                         </div>
                     </div>
                     <div class="painel">
                         <h3>Não pagas</h3>
-                        <div class="amostra">
+                        <div class="amostra" id="naoPagas">
 
                         </div>
-                        <div class="total-saida">
+                        <div class="total-saida" id="total-saida-naoPagas">
                             Total:
                         </div>
                     </div>
