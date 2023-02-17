@@ -1,5 +1,5 @@
 let form = window.document.getElementById('entrada')
-let lista = window.document.getElementById('tabela')
+let lista = window.document.getElementById('lista-despesas')
 let totalE = window.document.getElementById('total-entrada')
 let opc = window.document.getElementsByName('radopc')
 let pagas = window.document.getElementById('pagas')
@@ -30,7 +30,7 @@ form.addEventListener("submit", (evento) => {
         valor: valor
    }
 
-    criaDespesa(des.despesa, des.valor)
+    criaDespesa(des)
     calcTotalEntrada(des.valor)
     opcao(des.despesa, des.valor)
 
@@ -40,8 +40,19 @@ form.addEventListener("submit", (evento) => {
 
 })
 
-function criaDespesa(despesa, valor) {
-    lista.innerHTML += despesa + ` -> R$${valor} <br>`
+function criaDespesa(des) {
+    const novaDespesa = window.document.createElement("li")
+    novaDespesa.classList.add("des")
+
+    const nomeDespesa = window.document.createElement("strong") 
+    nomeDespesa.innerHTML = des.despesa
+    nomeDespesa.innerHTML += `: R$${des.valor}`
+
+    novaDespesa.appendChild(nomeDespesa)
+
+    novaDespesa.appendChild(botaoDeletar())
+
+    lista.appendChild(novaDespesa)
 }
 
 function calcTotalEntrada(valor) {
@@ -52,18 +63,33 @@ function calcTotalEntrada(valor) {
 
 function opcao(despesa, valor) {
     if(opc[0].checked){
-        pagas.innerHTML += despesa + ` -> R$${valor} <br>`
+        pagas.innerHTML += `<li>${despesa} -> R$${valor}</li>`
 
         totalP += valor
 
         totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
 
     }else if(opc[1].checked) {
-        naoPagas.innerHTML += despesa + ` -> R$${valor} <br>`
+        naoPagas.innerHTML += `<li>${despesa} -> R$${valor}</li>`
         
         totalNP += valor
 
         totalSNP.innerHTML = `Total: <strong>${totalNP}</strong>`
     }
+}
+
+function botaoDeletar() {
+    const botao = window.document.createElement("button")
+    botao.innerHTML = "X"
+
+    botao.addEventListener("click", function() {
+        deletar(this.parentNode)
+    })
+
+    return botao
+}
+
+function deletar(tag) {
+    tag.remove()
 }
 
