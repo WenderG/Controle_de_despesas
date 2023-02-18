@@ -50,6 +50,8 @@ li {
 }
 
 button {
-    margin-left: 10px;
+    border: none;
+    border-radius: 15px;
+    margin: 2px;
 }
 

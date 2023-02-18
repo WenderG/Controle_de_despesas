@@ -32,7 +32,6 @@ form.addEventListener("submit", (evento) => {
 
     criaDespesa(des)
     calcTotalEntrada(des.valor)
-    opcao(des.despesa, des.valor)
 
     listaDeContas.push(des)
 
@@ -44,15 +43,16 @@ function criaDespesa(des) {
     const novaDespesa = window.document.createElement("li")
     novaDespesa.classList.add("des")
 
+    novaDespesa.appendChild(botaoDeletar(des))
+
     const nomeDespesa = window.document.createElement("strong") 
     nomeDespesa.innerHTML = des.despesa
     nomeDespesa.innerHTML += `: R$${des.valor}`
 
     novaDespesa.appendChild(nomeDespesa)
 
-    novaDespesa.appendChild(botaoDeletar())
-
     lista.appendChild(novaDespesa)
+    opcao(des)
 }
 
 function calcTotalEntrada(valor) {
@@ -61,29 +61,86 @@ function calcTotalEntrada(valor) {
     totalE.innerHTML = `Total: <strong>${total}</strong>`
 }
 
-function opcao(despesa, valor) {
+function opcao(des) {
     if(opc[0].checked){
-        pagas.innerHTML += `<li>${despesa} -> R$${valor}</li>`
+        const novaDespesaPaga = window.document.createElement("li")
+        novaDespesaPaga.classList.add("des")
 
-        totalP += valor
+        novaDespesaPaga.appendChild(botaoDeletarPagas(des))
+
+        const nomeDespesa = window.document.createElement("strong") 
+        nomeDespesa.innerHTML = des.despesa
+        nomeDespesa.innerHTML += `: R$${des.valor}`
+
+        novaDespesaPaga.appendChild(nomeDespesa)
+        
+        totalP += des.valor
+
+        pagas.appendChild(novaDespesaPaga)
 
         totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
 
     }else if(opc[1].checked) {
-        naoPagas.innerHTML += `<li>${despesa} -> R$${valor}</li>`
+        const novaDespesaNaoPaga = window.document.createElement("li")
+        novaDespesaNaoPaga.classList.add("des")
+
+        novaDespesaNaoPaga.appendChild(botaoDeletarNaoPagas(des))
+
+        const nomeDespesa = window.document.createElement("strong") 
+        nomeDespesa.innerHTML = des.despesa
+        nomeDespesa.innerHTML += `: R$${des.valor}`
+
+        novaDespesaNaoPaga.appendChild(nomeDespesa)
         
-        totalNP += valor
+        totalNP += des.valor
+
+        naoPagas.appendChild(novaDespesaNaoPaga)
 
         totalSNP.innerHTML = `Total: <strong>${totalNP}</strong>`
     }
 }
 
-function botaoDeletar() {
+function botaoDeletar(des) {
     const botao = window.document.createElement("button")
     botao.innerHTML = "X"
 
     botao.addEventListener("click", function() {
         deletar(this.parentNode)
+
+        total -= des.valor 
+
+        totalE.innerHTML = `Total: <strong>${total}</strong>`
+        console.log(totalE)
+    })
+
+    return botao
+}
+
+function botaoDeletarPagas(des) {
+    const botao = window.document.createElement("button")
+    botao.innerHTML = "X"
+
+    botao.addEventListener("click", function() {
+        deletar(this.parentNode)
+
+        totalP -= des.valor 
+
+        totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
+    })
+
+    return botao
+}
+
+function botaoDeletarNaoPagas(des) {
+    const botao = window.document.createElement("button")
+    botao.innerHTML = "X"
+
+    botao.addEventListener("click", function() {
+        deletar(this.parentNode)
+
+        totalNP -= des.valor 
+
+        totalSNP.innerHTML = `Total: <strong>${totalNP}</strong>`
     })
 
     return botao
@@ -91,5 +148,6 @@ function botaoDeletar() {
 
 function deletar(tag) {
     tag.remove()
+
 }
 
