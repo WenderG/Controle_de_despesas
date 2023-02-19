@@ -7,11 +7,17 @@ let totalSP = window.document.getElementById('total-saida-pagas')
 let naoPagas = window.document.getElementById('naoPagas')
 let totalSNP = window.document.getElementById('total-saida-naoPagas')
 
+const listaDeContas = []
+
+const itens = JSON.parse(localStorage.getItem("listaDespesas")) || []
+
 let total = 0
 let totalP = 0
 let totalNP = 0
 
-const listaDeContas = []
+itens.forEach((elemento) => {
+    criaDespesa(elemento)
+})
 
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
@@ -27,16 +33,20 @@ form.addEventListener("submit", (evento) => {
 
     var des = {
         despesa: despesa,
-        valor: valor
+        valor: valor,
+        pagamento: 0
    }
 
+    despesa.value = ""
+    valor.value = 0
+
     criaDespesa(des)
-    calcTotalEntrada(des.valor)
 
     listaDeContas.push(des)
 
     localStorage.setItem("listaDespesas", JSON.stringify(listaDeContas))
 
+    
 })
 
 function criaDespesa(des) {
@@ -48,21 +58,28 @@ function criaDespesa(des) {
     const nomeDespesa = window.document.createElement("strong") 
     nomeDespesa.innerHTML = des.despesa
     nomeDespesa.innerHTML += `: R$${des.valor}`
+    calcTotalEntrada(des)
 
     novaDespesa.appendChild(nomeDespesa)
 
     lista.appendChild(novaDespesa)
+
+    if(opc[0].checked)
+        des.pagamento = 1
+    else if(opc[1].checked)
+        des.pagamento = 0
+
     opcao(des)
 }
 
-function calcTotalEntrada(valor) {
-    total += valor;
+function calcTotalEntrada(des) {
+    total += des.valor;
 
     totalE.innerHTML = `Total: <strong>${total}</strong>`
 }
 
 function opcao(des) {
-    if(opc[0].checked){
+    if(des.pagamento == 1){
         const novaDespesaPaga = window.document.createElement("li")
         novaDespesaPaga.classList.add("des")
 
@@ -80,7 +97,7 @@ function opcao(des) {
 
         totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
 
-    }else if(opc[1].checked) {
+    }else if(des.pagamento == 0) {
         const novaDespesaNaoPaga = window.document.createElement("li")
         novaDespesaNaoPaga.classList.add("des")
 
@@ -151,3 +168,18 @@ function deletar(tag) {
 
 }
 
+// function estatistica() {
+//     var maior = listaDeContas[0]
+//     var menor = listaDeContas[0]
+    
+//     for(var i = 0; i < listaDeContas.length; i++){
+//         if(maior > listaDeContas[i]){
+//             if(menor > listaDeContas[i])
+//                 menor = listaDeContas[i]
+//         }else {
+//             maior = listaDeContas[i]
+//         }
+//     }
+
+//     console.log(maior, menor)
+// }

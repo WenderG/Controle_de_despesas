@@ -42,7 +42,6 @@ ul {
 }
 
 li {
-    border: 1px solid var(--preto);
     font-size: 12px;
     margin-top: 5px;
     list-style-type: none;
