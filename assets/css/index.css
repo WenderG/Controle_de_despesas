@@ -122,6 +122,12 @@ input#adicionar:hover {
     padding: 2px 0 2px 4px;
 }
 
+footer {
+    color: var(--branco);
+    text-align: center;
+    margin-top: 1rem;
+}
+
 
 @media screen and (min-width: 600px) {
     .display {

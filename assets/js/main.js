@@ -7,8 +7,6 @@ let totalSP = window.document.getElementById('total-saida-pagas')
 let naoPagas = window.document.getElementById('naoPagas')
 let totalSNP = window.document.getElementById('total-saida-naoPagas')
 
-const listaDeContas = []
-
 const itens = JSON.parse(localStorage.getItem("listaDespesas")) || []
 
 let total = 0
@@ -25,6 +23,8 @@ form.addEventListener("submit", (evento) => {
     let despesa = evento.target.elements['despesa'].value
     let valor = evento.target.elements['valor'].value
 
+    const existe = itens.find(elemento => elemento.despesa === despesa.value)
+
     valor = parseFloat(valor)
 
     if(localStorage.hasOwnProperty('listaDeContas')){
@@ -37,27 +37,35 @@ form.addEventListener("submit", (evento) => {
         pagamento: 0
    }
 
-    despesa.value = ""
-    valor.value = 0
+    if(existe) {
+        des.id = existe.id
 
-    criaDespesa(des)
+        atualizaElemento(des)
 
-    listaDeContas.push(des)
+        itens[itens.findIndex(elemento => elemento.id === existe.id)] = des
+    } else{
+        des.id = itens[itens.length -1] ? (itens[itens.length-1]).id + 1 : 0;
 
-    localStorage.setItem("listaDespesas", JSON.stringify(listaDeContas))
+        criaDespesa(des)
 
+        itens.push(des)
+    }
+
+    localStorage.setItem("listaDespesas", JSON.stringify(itens))
     
 })
 
 function criaDespesa(des) {
     const novaDespesa = window.document.createElement("li")
     novaDespesa.classList.add("des")
+    novaDespesa.dataset.id = des.id
 
-    novaDespesa.appendChild(botaoDeletar(des))
+    novaDespesa.appendChild(botaoDeletar(des, des.id))
 
     const nomeDespesa = window.document.createElement("strong") 
     nomeDespesa.innerHTML = des.despesa
     nomeDespesa.innerHTML += `: R$${des.valor}`
+
     calcTotalEntrada(des)
 
     novaDespesa.appendChild(nomeDespesa)
@@ -75,15 +83,13 @@ function criaDespesa(des) {
 function calcTotalEntrada(des) {
     total += des.valor;
 
-    totalE.innerHTML = `Total: <strong>${total}</strong>`
+    totalE.innerHTML = `Total: <strong>R$${total}</strong>`
 }
 
 function opcao(des) {
     if(des.pagamento == 1){
         const novaDespesaPaga = window.document.createElement("li")
         novaDespesaPaga.classList.add("des")
-
-        novaDespesaPaga.appendChild(botaoDeletarPagas(des))
 
         const nomeDespesa = window.document.createElement("strong") 
         nomeDespesa.innerHTML = des.despesa
@@ -95,13 +101,11 @@ function opcao(des) {
 
         pagas.appendChild(novaDespesaPaga)
 
-        totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
+        totalSP.innerHTML = `Total: <strong>R$${totalP}</strong>`
 
     }else if(des.pagamento == 0) {
         const novaDespesaNaoPaga = window.document.createElement("li")
         novaDespesaNaoPaga.classList.add("des")
-
-        novaDespesaNaoPaga.appendChild(botaoDeletarNaoPagas(des))
 
         const nomeDespesa = window.document.createElement("strong") 
         nomeDespesa.innerHTML = des.despesa
@@ -113,73 +117,35 @@ function opcao(des) {
 
         naoPagas.appendChild(novaDespesaNaoPaga)
 
-        totalSNP.innerHTML = `Total: <strong>${totalNP}</strong>`
+        totalSNP.innerHTML = `Total: <strong>R$${totalNP}</strong>`
     }
 }
 
-function botaoDeletar(des) {
+function atualizaElemento(item) {
+    document.querySelector("[data-id='"+item.id+"']").innerHTML = item.valor
+}
+
+function botaoDeletar(des, id) {
     const botao = window.document.createElement("button")
     botao.innerHTML = "X"
 
     botao.addEventListener("click", function() {
-        deletar(this.parentNode)
+        deletar(this.parentNode, id)
 
         total -= des.valor 
 
-        totalE.innerHTML = `Total: <strong>${total}</strong>`
+        totalE.innerHTML = `Total: <strong>R$${total}</strong>`
         console.log(totalE)
     })
 
     return botao
 }
 
-function botaoDeletarPagas(des) {
-    const botao = window.document.createElement("button")
-    botao.innerHTML = "X"
-
-    botao.addEventListener("click", function() {
-        deletar(this.parentNode)
-
-        totalP -= des.valor 
-
-        totalSP.innerHTML = `Total: <strong>${totalP}</strong>`
-    })
-
-    return botao
-}
-
-function botaoDeletarNaoPagas(des) {
-    const botao = window.document.createElement("button")
-    botao.innerHTML = "X"
-
-    botao.addEventListener("click", function() {
-        deletar(this.parentNode)
-
-        totalNP -= des.valor 
-
-        totalSNP.innerHTML = `Total: <strong>${totalNP}</strong>`
-    })
-
-    return botao
-}
-
-function deletar(tag) {
+function deletar(tag, id) {
     tag.remove()
 
+    itens.splice(itens.findIndex(elemento => elemento.id === id), 1)
+
+    localStorage.setItem("listaDespesas", JSON.stringify(itens))
+
 }
-
-// function estatistica() {
-//     var maior = listaDeContas[0]
-//     var menor = listaDeContas[0]
-    
-//     for(var i = 0; i < listaDeContas.length; i++){
-//         if(maior > listaDeContas[i]){
-//             if(menor > listaDeContas[i])
-//                 menor = listaDeContas[i]
-//         }else {
-//             maior = listaDeContas[i]
-//         }
-//     }
-
-//     console.log(maior, menor)
-// }
